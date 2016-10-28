@@ -166,7 +166,7 @@ function subway(personName){
   return function addIngredient(str){
     return {
       orderPerson: personName,
-      ingredients: ingredients.[]
+      ingredients: ingredients
     }
   };
 };
