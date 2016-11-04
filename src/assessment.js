@@ -29,7 +29,7 @@
 var scopeArray1 = ["grandpa", "dad", "son", "uncle", "cousin"];
 
 // Which function(s) access the playball variable and get touchdown (Delete wrong answers, leave correct ones)
-var scopeArray2 = ["dad", "son", "uncle", "cousin"];
+var scopeArray2 = ["dad", "son"];
 
 // Which function(s) access the badjoke variable and get undefined (Delete wrong answers, leave correct ones)
 var scopeArray3 = ["grandpa", "dad", "son"];
@@ -38,7 +38,7 @@ var scopeArray3 = ["grandpa", "dad", "son"];
 var scopeArray4 = ["uncle", "cousin"];
 
 // Which functions access the playnintendo variable and get Mario (Delete wrong answers, leave correct ones)
-var scopeArray5 = ["son", "uncle", "cousin"];
+var scopeArray5 = ["son"];
 
 
 // #2  ###################
@@ -51,12 +51,11 @@ var foo;
   And resolve the promise when setTimeout completes.
 */
 async = function(){
-
   var defer = $q.defer();
-  setTimeout(function(){
-    defer.resolve();
-    var foo = 'bar';
-  }, 1000);
+  var fn = function(){
+    foo = "bar";
+  };
+  setTimeout(defer.resolve(fn()), 1000);
   return defer.promise;
 };
 
@@ -163,14 +162,16 @@ sentenceSmasher(partTwo);
 // }
 // ```
 function subway(personName){
-  return function addIngredient(str){
-    return {
+  return function addIngredient(ingredient){
+    var order = {
       orderPerson: personName,
-      ingredients: ingredients
-    }
-  };
+      ingredients: []
+    };
+    order.ingredients.push(ingredient);
+    return order;
+  }
 };
-addIngredient();
+
 
 // #12  ###################
 // # Type checking
@@ -178,3 +179,12 @@ addIngredient();
 // If both parameters are the same type an the same value return "Exact match".
 // If both parameters have the same value but are different types return "Different types"
 // Otherwise return "Different values"
+function compareValues(param1, param2){
+  if(param1 === param2){
+    return "Exact match";
+  }else if(param1 == param2){
+    return "Different types";
+  }else{
+      return "Different values";
+    }
+}
